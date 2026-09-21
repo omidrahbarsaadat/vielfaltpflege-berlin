@@ -1,4 +1,4 @@
-# VielfaltPflege Berlin
+# Vielnah Berlin
 
 Portfolio-Website für das Konzept eines professionellen, diversitäts- und
 diskriminierungssensiblen ambulanten Pflegedienstes in Berlin.
@@ -15,8 +15,9 @@ diskriminierungssensiblen ambulanten Pflegedienstes in Berlin.
 Die veröffentlichte Website ist als statische, responsive Einzelseite in `dist/`
 umgesetzt. Sie benötigt weder Build-Schritt noch Laufzeit-Abhängigkeiten.
 
+Live: https://vielnah-berlin.vercel.app/
+
 ## Lokal ansehen
 
 `dist/index.html` kann direkt im Browser geöffnet oder über einen beliebigen
 statischen Webserver ausgeliefert werden.
-
