@@ -5,6 +5,7 @@
   --blue: #3157f6;
   --blue-bright: #5d7bff;
   --blue-deep: #1c36ae;
+  --signal: #ffd928;
   --ice: #edf2ff;
   --paper: #f6f7fa;
   --white: #fff;
@@ -44,7 +45,9 @@ main { overflow: hidden; }
 .hero { min-height: 960px; padding: 150px max(24px, calc((100vw - 1160px) / 2)) 94px; display: grid; grid-template-columns: minmax(0, 0.93fr) minmax(440px, 1.07fr); align-items: center; gap: 64px; background: radial-gradient(circle at 78% 20%, rgba(102, 137, 255, 0.15), transparent 31%), linear-gradient(180deg, #fcfdff 0%, #f1f4fa 100%); }
 .eyebrow { display: flex; align-items: center; gap: 9px; margin: 0 0 28px; color: var(--blue-deep); font-size: 0.75rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
 .eyebrow span { width: 7px; height: 7px; background: #5576ff; border-radius: 99px; box-shadow: 0 0 0 6px rgba(85, 118, 255, 0.12); }
-h1 { max-width: 700px; margin: 0; font-size: clamp(3.8rem, 6.15vw, 6.75rem); line-height: 0.93; letter-spacing: -0.074em; font-weight: 700; }
+h1 { max-width: 700px; margin: 0; font-size: clamp(3.35rem, 5.65vw, 6.15rem); line-height: 0.94; letter-spacing: -0.074em; font-weight: 700; }
+h1 span, h1 mark { display: block; }
+h1 mark { width: fit-content; margin-top: 10px; padding: .02em .14em .1em; color: var(--ink); background: var(--signal); border-radius: .16em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 .hero-lead { max-width: 610px; margin: 34px 0 0; color: var(--ink-soft); font-size: clamp(1.02rem, 1.4vw, 1.2rem); line-height: 1.72; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 38px; }
 .button { display: inline-flex; min-height: 52px; align-items: center; justify-content: center; gap: 8px; padding: 0 22px; border-radius: 16px; font-size: 0.9rem; font-weight: 750; transition: transform 180ms ease, box-shadow 180ms ease; }
@@ -100,6 +103,15 @@ h1 { max-width: 700px; margin: 0; font-size: clamp(3.8rem, 6.15vw, 6.75rem); lin
 
 .section-index { margin: 10px 0 0; color: var(--blue); font-size: 0.75rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
 .light-index { color: #92a6ff; }
+
+.campaign-statement { position: relative; padding: clamp(72px, 9vw, 132px) max(24px, calc((100vw - 1160px) / 2)); overflow: hidden; color: var(--ink); background: var(--signal); }
+.campaign-statement::after { content: "V"; position: absolute; right: -0.04em; bottom: -.3em; color: rgba(16,22,43,.07); font-size: clamp(18rem, 42vw, 43rem); font-weight: 800; line-height: 1; letter-spacing: -.12em; pointer-events: none; }
+.campaign-statement > * { position: relative; z-index: 1; }
+.campaign-statement > p { margin: 0 0 18px; font-size: .76rem; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
+.campaign-statement h2 { max-width: 100%; margin: 0; font-size: clamp(3.6rem, 10.2vw, 10.5rem); font-weight: 800; line-height: .82; letter-spacing: -.085em; white-space: nowrap; }
+.campaign-footer { max-width: 900px; margin-top: clamp(42px, 6vw, 78px); display: grid; grid-template-columns: .45fr 1fr; gap: 34px; align-items: start; border-top: 2px solid rgba(16,22,43,.7); padding-top: 22px; }
+.campaign-footer strong { font-size: clamp(1.35rem, 2.6vw, 2.25rem); letter-spacing: -.05em; }
+.campaign-footer span { max-width: 590px; font-size: clamp(.95rem, 1.4vw, 1.08rem); font-weight: 650; line-height: 1.6; }
 
 .intro { width: min(1160px, calc(100% - 48px)); margin: 0 auto; padding: 140px 0 150px; display: grid; grid-template-columns: 0.35fr 1fr; gap: 54px; }
 .intro h2, .section-heading h2, .needs-head h2, .quality h2, .team h2 { margin: 0; font-size: clamp(2.9rem, 5.2vw, 5.3rem); line-height: 1.01; letter-spacing: -.063em; }
@@ -319,7 +331,7 @@ footer p a:hover { color: white; }
   .brand-mark { width: 29px; height: 29px; }
   .nav-cta { padding: 10px 13px; font-size: .71rem; }
   .hero { padding-inline: 20px; padding-bottom: 70px; }
-  h1 { font-size: clamp(3.3rem, 16vw, 5rem); }
+  h1 { font-size: clamp(2.35rem, 11vw, 4.5rem); }
   .hero-lead { font-size: 1rem; }
   .hero-principles { gap: 9px; }
   .concept-facts { grid-template-columns: 1fr; }
@@ -331,6 +343,9 @@ footer p a:hover { color: white; }
   .image-shell figcaption { right: 25px; bottom: 25px; left: 25px; display: block; }
   .image-shell figcaption strong { display: block; margin-top: 8px; text-align: left; }
   .floating-note { display: none; }
+  .campaign-statement { padding: 78px 20px; }
+  .campaign-statement h2 { font-size: clamp(2.35rem, 10.5vw, 5rem); }
+  .campaign-footer { grid-template-columns: 1fr; gap: 12px; }
   .intro, .services, .concept-detail, .roadmap, .cooperation, .team, .contact { width: calc(100% - 40px); padding: 96px 0; }
   .intro h2, .section-heading h2, .concept-heading h2, .needs-head h2, .quality h2, .team h2, .commitment-heading h2, .contact-heading h2 { font-size: clamp(2.65rem, 12.5vw, 4rem); }
   .principle-grid { grid-template-columns: 1fr; }
