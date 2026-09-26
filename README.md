@@ -1,5 +1,7 @@
 # Vielnah Berlin
 
+**Unterstützung, die bleibt.**
+
 Portfolio-Website für das Konzept eines professionellen, diversitäts- und
 diskriminierungssensiblen ambulanten Pflegedienstes in Berlin.
 
@@ -12,6 +14,7 @@ diskriminierungssensiblen ambulanten Pflegedienstes in Berlin.
 - Kooperationsmodell
 - Gründerteam
 - Bewegte, interaktive Bildinszenierung mit Unterstützung für reduzierte Bewegung
+- Eigenständige gelbe Kampagnenfläche für die Markenbotschaft „Unterstützung, die bleibt.“
 
 Die veröffentlichte Website ist als statische, responsive Einzelseite in `dist/`
 umgesetzt. Sie benötigt weder Build-Schritt noch Laufzeit-Abhängigkeiten.
