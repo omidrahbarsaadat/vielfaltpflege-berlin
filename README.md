@@ -11,7 +11,7 @@ diskriminierungssensiblen ambulanten Pflegedienstes in Berlin.
 - Aufbau- und Pilotphasen
 - Kooperationsmodell
 - Gründerteam
-- Bewegte, interaktive Bildinszenierung mit reduzierter-Motion-Unterstützung
+- Bewegte, interaktive Bildinszenierung mit Unterstützung für reduzierte Bewegung
 
 Die veröffentlichte Website ist als statische, responsive Einzelseite in `dist/`
 umgesetzt. Sie benötigt weder Build-Schritt noch Laufzeit-Abhängigkeiten.
