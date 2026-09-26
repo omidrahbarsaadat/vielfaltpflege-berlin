@@ -59,18 +59,44 @@ h1 { max-width: 700px; margin: 0; font-size: clamp(3.8rem, 6.15vw, 6.75rem); lin
 .concept-facts dt { color: #8b93a6; font-size: .64rem; font-weight: 750; letter-spacing: .07em; text-transform: uppercase; }
 .concept-facts dd { margin: 7px 0 0; color: var(--ink-2); font-size: .72rem; font-weight: 700; line-height: 1.45; }
 
-.hero-visual { position: relative; margin: 0; }
-.image-shell { position: relative; aspect-ratio: 0.9; overflow: hidden; background: var(--ink); border-radius: 46px; box-shadow: var(--shadow); }
-.image-shell img { width: 100%; height: 100%; object-fit: cover; object-position: 54% center; transition: transform 800ms cubic-bezier(.2,.8,.2,1); }
-.hero-visual:hover img { transform: scale(1.025); }
-.image-gradient { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 48%, rgba(7, 13, 29, 0.8) 100%); }
-.image-shell figcaption { position: absolute; right: 40px; bottom: 38px; left: 40px; display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; color: white; }
+.hero-visual { position: relative; margin: 0; perspective: 1200px; }
+.image-shell { --tilt-x: 0deg; --tilt-y: 0deg; --pointer-x: 50%; --pointer-y: 50%; position: relative; aspect-ratio: 0.9; overflow: hidden; background: var(--ink); border-radius: 46px; box-shadow: var(--shadow); transform: rotateX(var(--tilt-y)) rotateY(var(--tilt-x)); transform-style: preserve-3d; transition: transform 500ms cubic-bezier(.2,.8,.2,1), box-shadow 500ms ease; will-change: transform; }
+.hero-visual:hover .image-shell { box-shadow: 0 38px 100px rgba(25, 44, 104, .24); }
+.image-media { position: absolute; inset: -6%; transform: translate3d(0, var(--parallax, 0px), 0); transition: transform 140ms linear; will-change: transform; }
+.image-shell img { width: 100%; height: 100%; object-fit: cover; object-position: 54% center; animation: image-breathe 13s cubic-bezier(.45,0,.2,1) infinite alternate; will-change: transform; }
+.image-shell::after { content: ""; position: absolute; z-index: 2; inset: 0; background: radial-gradient(circle at var(--pointer-x) var(--pointer-y), rgba(255,255,255,.2), transparent 28%); mix-blend-mode: soft-light; opacity: 0; transition: opacity 350ms ease; pointer-events: none; }
+.hero-visual:hover .image-shell::after { opacity: 1; }
+.image-gradient { position: absolute; z-index: 1; inset: 0; background: linear-gradient(180deg, transparent 48%, rgba(7, 13, 29, 0.8) 100%); }
+.story-progress { position: absolute; z-index: 4; top: 20px; right: 22px; left: 22px; display: grid; grid-template-columns: 1.4fr 1fr .7fr; gap: 6px; }
+.story-progress i { height: 3px; overflow: hidden; background: rgba(255,255,255,.3); border-radius: 999px; }
+.story-progress i::after { content: ""; display: block; width: 100%; height: 100%; background: white; border-radius: inherit; transform: translateX(-105%); animation: story-line 8s ease-in-out infinite; }
+.story-progress i:nth-child(2)::after { animation-delay: 2.7s; }
+.story-progress i:nth-child(3)::after { animation-delay: 5.4s; }
+.motion-badge { position: absolute; z-index: 4; top: 38px; left: 22px; display: flex; align-items: center; gap: 8px; padding: 8px 11px; color: rgba(255,255,255,.88); background: rgba(9,14,29,.28); border: 1px solid rgba(255,255,255,.2); border-radius: 999px; backdrop-filter: blur(14px); font-size: .63rem; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; }
+.motion-badge span { width: 6px; height: 6px; background: #8fa4ff; border-radius: 50%; box-shadow: 0 0 0 5px rgba(143,164,255,.18); animation: badge-pulse 2s ease-in-out infinite; }
+.image-shell figcaption { position: absolute; z-index: 3; right: 40px; bottom: 38px; left: 40px; display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; color: white; }
 .image-shell figcaption span { max-width: 80px; color: rgba(255,255,255,.68); font-size: .72rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
 .image-shell figcaption strong { text-align: right; font-size: clamp(1.35rem, 2vw, 2rem); line-height: 1.13; letter-spacing: -.04em; }
-.floating-note { position: absolute; z-index: 4; display: flex; align-items: center; gap: 9px; padding: 12px 16px; background: rgba(255,255,255,.86); border: 1px solid rgba(255,255,255,.92); border-radius: 15px; box-shadow: 0 14px 36px rgba(20, 33, 76, .14); backdrop-filter: blur(12px); font-size: .78rem; font-weight: 750; }
+.floating-note { position: absolute; z-index: 4; display: flex; align-items: center; gap: 9px; padding: 12px 16px; background: rgba(255,255,255,.86); border: 1px solid rgba(255,255,255,.92); border-radius: 15px; box-shadow: 0 14px 36px rgba(20, 33, 76, .14); backdrop-filter: blur(12px); font-size: .78rem; font-weight: 750; animation: note-float 4.8s ease-in-out infinite; }
 .floating-note span { color: var(--blue); font-size: .66rem; }
 .note-top { top: 13%; right: -28px; }
-.note-bottom { bottom: 25%; left: -34px; }
+.note-bottom { bottom: 25%; left: -34px; animation-delay: -2.4s; }
+
+@keyframes image-breathe {
+  from { transform: scale(1.03) translate3d(-.7%, -.4%, 0); }
+  to { transform: scale(1.095) translate3d(.8%, .5%, 0); }
+}
+@keyframes story-line {
+  0%, 8% { transform: translateX(-105%); }
+  34%, 100% { transform: translateX(105%); }
+}
+@keyframes badge-pulse {
+  50% { opacity: .65; transform: scale(.82); }
+}
+@keyframes note-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -10px; }
+}
 
 .section-index { margin: 10px 0 0; color: var(--blue); font-size: 0.75rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
 .light-index { color: #92a6ff; }
@@ -300,6 +326,8 @@ footer p a:hover { color: white; }
   .concept-facts div { padding: 15px 0; border-bottom: 1px solid var(--line); }
   .image-shell { aspect-ratio: .84; border-radius: 30px; }
   .image-shell img { object-position: 55% center; }
+  .story-progress { top: 16px; right: 17px; left: 17px; }
+  .motion-badge { top: 31px; left: 17px; }
   .image-shell figcaption { right: 25px; bottom: 25px; left: 25px; display: block; }
   .image-shell figcaption strong { display: block; margin-top: 8px; text-align: left; }
   .floating-note { display: none; }
@@ -367,4 +395,6 @@ footer p a:hover { color: white; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .js .reveal { opacity: 1; transform: none; }
+  .image-media, .image-shell { transform: none !important; }
 }
+
