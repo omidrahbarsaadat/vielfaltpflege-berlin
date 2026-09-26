@@ -25,6 +25,52 @@ const revealObserver = new IntersectionObserver(
 
 revealItems.forEach((item) => revealObserver.observe(item));
 
+const motionCard = document.querySelector('[data-motion-card]');
+const motionShell = motionCard?.querySelector('.image-shell');
+const motionImage = motionCard?.querySelector('[data-motion-image]');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+if (motionCard && motionShell && motionImage && !reduceMotion.matches) {
+  let ticking = false;
+
+  const updateParallax = () => {
+    const rect = motionCard.getBoundingClientRect();
+    const viewportCenter = window.innerHeight / 2;
+    const cardCenter = rect.top + rect.height / 2;
+    const distance = Math.max(-1, Math.min(1, (cardCenter - viewportCenter) / window.innerHeight));
+    motionImage.style.setProperty('--parallax', `${distance * -22}px`);
+    ticking = false;
+  };
+
+  const queueParallax = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(updateParallax);
+  };
+
+  motionCard.addEventListener('pointermove', (event) => {
+    if (event.pointerType === 'touch') return;
+    const rect = motionCard.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width;
+    const y = (event.clientY - rect.top) / rect.height;
+    motionShell.style.setProperty('--tilt-x', `${(x - 0.5) * 6}deg`);
+    motionShell.style.setProperty('--tilt-y', `${(0.5 - y) * 6}deg`);
+    motionShell.style.setProperty('--pointer-x', `${x * 100}%`);
+    motionShell.style.setProperty('--pointer-y', `${y * 100}%`);
+  });
+
+  motionCard.addEventListener('pointerleave', () => {
+    motionShell.style.setProperty('--tilt-x', '0deg');
+    motionShell.style.setProperty('--tilt-y', '0deg');
+    motionShell.style.setProperty('--pointer-x', '50%');
+    motionShell.style.setProperty('--pointer-y', '50%');
+  });
+
+  updateParallax();
+  window.addEventListener('scroll', queueParallax, { passive: true });
+  window.addEventListener('resize', queueParallax);
+}
+
 document.querySelectorAll('[role="tablist"]').forEach((tabList) => {
   const tabContainer = tabList.closest('.concept-tabs');
   const tabs = Array.from(tabList.querySelectorAll('[role="tab"]'));
@@ -61,3 +107,4 @@ document.querySelectorAll('[role="tablist"]').forEach((tabList) => {
     });
   });
 });
+
